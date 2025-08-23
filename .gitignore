@@ -1,0 +1,15 @@
+# Ignorar dependencias y archivos generados
+node_modules/
+coverage/
+.env
+*.log
+.DS_Store
+npm-debug.log*
+
+# Ignorar reportes y archivos temporales
+*.tgz
+*.zip
+*.tar
+
+# Ignorar archivos de sistema
+Thumbs.db
