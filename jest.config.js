@@ -5,8 +5,8 @@ module.exports = {
   // Archivos de configuración que se ejecutan antes de los tests
   setupFilesAfterEnv: ["<rootDir>/__tests__/setup.js"],
 
-  // Patrones de archivos de test
-  testMatch: ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
+  // Patrones de archivos de test (solo .test.js o .spec.js)
+  testMatch: ["**/__tests__/**/*.test.js", "**/__tests__/**/*.spec.js"],
 
   // Directorios a ignorar
   testPathIgnorePatterns: ["/node_modules/", "/build/", "/dist/"],
@@ -17,7 +17,12 @@ module.exports = {
   coverageReporters: ["text", "lcov", "html"],
 
   // Archivos a incluir en la cobertura
-  collectCoverageFrom: ["src/**/*.js", "!src/config/**", "!src/server.js", "!**/node_modules/**"],
+  collectCoverageFrom: [
+    "src/**/*.js",
+    "!src/config/**",
+    "!src/server.js",
+    "!**/node_modules/**",
+  ],
 
   // Umbrales de cobertura
   coverageThreshold: {
