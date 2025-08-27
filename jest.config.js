@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: "node",
 
   // Archivos de configuración que se ejecutan antes de los tests
-  setupFilesAfterEnv: ["<rootDir>/__tests__/setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/__tests__/setup.jest.js"],
 
   // Patrones de archivos de test (solo .test.js o .spec.js)
   testMatch: ["**/__tests__/**/*.test.js", "**/__tests__/**/*.spec.js"],
