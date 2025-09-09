@@ -15,9 +15,10 @@ router.post('/nueva-password', AuthController.nuevaPassword);
 
 
 // Ruta de prueba protegida
-router.get('/protegido', verifyToken, (req, res) => {
+router.get('/protegido', (req, res) => {
   res.json({ mensaje: 'Acceso concedido', usuario: req.user });
 });
 
 
 module.exports = router;
+

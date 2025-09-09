@@ -31,7 +31,7 @@ const VentaService = {
   obtenerPorRangoFechas: (fechaInicio, fechaFin) => VentaModel.findByDateRange(fechaInicio, fechaFin),
 
   crear: async (data) => {
-    const connection = await db.getConnection()
+    const connection = await connect()
     await connection.beginTransaction()
 
     try {
@@ -129,13 +129,15 @@ const VentaService = {
             )
           }
 
-          const subtotal = cantidad * repuestoData.precio_venta
+          const precio_unitario = repuestoData.precio_venta
+          const subtotal = cantidad * precio_unitario
           total += subtotal
 
           await VentaPorRepuestoModel.create({
             venta_id: ventaId,
             repuesto_id,
             cantidad,
+            precio_unitario,
             subtotal,
           })
 
@@ -160,7 +162,7 @@ const VentaService = {
             repuesto_descripcion: repuestoData.descripcion,
             categoria_nombre: categoriaResult[0]?.nombre || "Sin categoría",
             cantidad,
-            precio_unitario: repuestoData.precio_venta,
+            precio_unitario,
             subtotal,
           })
         }
@@ -236,7 +238,7 @@ const VentaService = {
   },
 
   actualizar: async (id, data) => {
-    const connection = await db.getConnection()
+    const connection = await connect()
     await connection.beginTransaction()
 
     try {
@@ -341,13 +343,15 @@ const VentaService = {
             )
           }
 
-          const subtotal = cantidad * repuestoData.precio_venta
+          const precio_unitario = repuestoData.precio_venta
+          const subtotal = cantidad * precio_unitario
           total += subtotal
 
           await VentaPorRepuestoModel.create({
             venta_id: id,
             repuesto_id,
             cantidad,
+            precio_unitario,
             subtotal,
           })
 
@@ -372,7 +376,7 @@ const VentaService = {
             repuesto_descripcion: repuestoData.descripcion,
             categoria_nombre: categoriaResult[0]?.nombre || "Sin categoría",
             cantidad,
-            precio_unitario: repuestoData.precio_venta,
+            precio_unitario,
             subtotal,
           })
         }
@@ -468,7 +472,7 @@ const VentaService = {
   },
 
   eliminar: async (id) => {
-    const connection = await db.getConnection()
+    const connection = await connect()
     await connection.beginTransaction()
 
     try {
@@ -541,7 +545,7 @@ const VentaService = {
   },
 
   cambiarEstado: async (id, estadoId) => {
-    const connection = await db.getConnection()
+    const connection = await connect()
     await connection.beginTransaction()
 
     try {
@@ -635,7 +639,7 @@ const VentaService = {
 
   // Vincular venta existente con cita
   vincularConCita: async (ventaId, citaId, observaciones = null) => {
-    const connection = await db.getConnection()
+    const connection = await connect()
     await connection.beginTransaction()
 
     try {
